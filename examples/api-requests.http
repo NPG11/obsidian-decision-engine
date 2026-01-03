@@ -1,0 +1,223 @@
+# =============================================================================
+# Obsidian Decision Engine - Example API Requests
+# =============================================================================
+# 
+# Run these with curl or import into Postman/Insomnia
+#
+# Base URL: http://localhost:3000
+# =============================================================================
+
+### Health Check
+GET http://localhost:3000/health
+
+### Detailed Health Check
+GET http://localhost:3000/health/detailed
+
+### ============================================================================
+### AFFORDABILITY CHECK
+### ============================================================================
+
+### Example 1: Small Purchase - Healthy Finances
+POST http://localhost:3000/api/v1/affordability
+Content-Type: application/json
+
+{
+  "user": {
+    "monthly_income": 6000,
+    "monthly_fixed_expenses": 3000,
+    "cash_balance": 15000,
+    "savings_balance": 5000,
+    "debts": [
+      {
+        "type": "credit_card",
+        "balance": 2000,
+        "apr": 18.99,
+        "minimum_payment": 50,
+        "credit_limit": 10000
+      }
+    ]
+  },
+  "purchase": {
+    "amount": 200,
+    "category": "electronics",
+    "payment_method": "debit"
+  }
+}
+
+### Example 2: Large Purchase - Stressed Finances
+POST http://localhost:3000/api/v1/affordability
+Content-Type: application/json
+
+{
+  "user": {
+    "monthly_income": 4000,
+    "monthly_fixed_expenses": 3500,
+    "cash_balance": 1000,
+    "debts": [
+      {
+        "type": "credit_card",
+        "balance": 8000,
+        "apr": 24.99,
+        "minimum_payment": 200,
+        "credit_limit": 10000
+      }
+    ]
+  },
+  "purchase": {
+    "amount": 1500,
+    "category": "appliances",
+    "payment_method": "credit_card"
+  }
+}
+
+### Example 3: Financed Purchase
+POST http://localhost:3000/api/v1/affordability
+Content-Type: application/json
+
+{
+  "user": {
+    "monthly_income": 5000,
+    "monthly_fixed_expenses": 2500,
+    "cash_balance": 3000,
+    "debts": []
+  },
+  "purchase": {
+    "amount": 2000,
+    "category": "electronics",
+    "payment_method": "financing",
+    "financing_terms": {
+      "apr": 0,
+      "term_months": 12,
+      "down_payment": 0
+    }
+  }
+}
+
+### ============================================================================
+### DEBT PAYOFF PLAN
+### ============================================================================
+
+### Example: Multiple Debts - Get Optimal Strategy
+POST http://localhost:3000/api/v1/debt/payoff-plan
+Content-Type: application/json
+
+{
+  "user": {
+    "monthly_income": 6000,
+    "monthly_fixed_expenses": 3000,
+    "cash_balance": 2000,
+    "debts": [
+      {
+        "id": "cc1",
+        "type": "credit_card",
+        "name": "Chase Sapphire",
+        "balance": 5000,
+        "apr": 24.99,
+        "minimum_payment": 100,
+        "credit_limit": 10000
+      },
+      {
+        "id": "cc2",
+        "type": "credit_card",
+        "name": "Discover",
+        "balance": 500,
+        "apr": 18.99,
+        "minimum_payment": 25,
+        "credit_limit": 3000
+      },
+      {
+        "id": "loan1",
+        "type": "personal_loan",
+        "name": "SoFi Personal Loan",
+        "balance": 8000,
+        "apr": 12.0,
+        "minimum_payment": 200
+      }
+    ]
+  },
+  "extra_monthly_payment": 300,
+  "include_schedule": true
+}
+
+### Example: Simulate Specific Strategy
+POST http://localhost:3000/api/v1/debt/simulate
+Content-Type: application/json
+
+{
+  "debts": [
+    { "type": "credit_card", "balance": 3000, "apr": 22.99, "minimum_payment": 60, "name": "Card A" },
+    { "type": "credit_card", "balance": 1500, "apr": 19.99, "minimum_payment": 30, "name": "Card B" }
+  ],
+  "strategy": "snowball",
+  "extra_monthly_payment": 200
+}
+
+### ============================================================================
+### NEXT BEST ACTION
+### ============================================================================
+
+### Example: Get Financial Priorities
+POST http://localhost:3000/api/v1/next-action
+Content-Type: application/json
+
+{
+  "user": {
+    "monthly_income": 5500,
+    "monthly_fixed_expenses": 3200,
+    "cash_balance": 2500,
+    "savings_balance": 1000,
+    "debts": [
+      {
+        "type": "credit_card",
+        "balance": 6000,
+        "apr": 22.99,
+        "minimum_payment": 120,
+        "credit_limit": 8000
+      },
+      {
+        "type": "student_loan",
+        "balance": 25000,
+        "apr": 6.5,
+        "minimum_payment": 280
+      }
+    ],
+    "credit_score": 680
+  },
+  "max_actions": 5
+}
+
+### ============================================================================
+### HEALTH SCORE
+### ============================================================================
+
+### Example: Get Financial Health Grade
+POST http://localhost:3000/api/v1/health-score
+Content-Type: application/json
+
+{
+  "user": {
+    "monthly_income": 7000,
+    "monthly_fixed_expenses": 3500,
+    "cash_balance": 20000,
+    "savings_balance": 15000,
+    "emergency_fund": 10000,
+    "debts": [],
+    "credit_score": 780
+  }
+}
+
+### Example: Stressed Financial Health
+POST http://localhost:3000/api/v1/health-score
+Content-Type: application/json
+
+{
+  "user": {
+    "monthly_income": 3500,
+    "monthly_fixed_expenses": 3000,
+    "cash_balance": 300,
+    "debts": [
+      { "type": "credit_card", "balance": 9000, "apr": 26.99, "credit_limit": 10000 },
+      { "type": "payday_loan", "balance": 500, "apr": 300 }
+    ]
+  }
+}

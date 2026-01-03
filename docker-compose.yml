@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  obsidian-engine:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - LOG_LEVEL=info
+      - RATE_LIMIT_MAX=100
+      # Add your OpenAI key for AI explanations
+      # - OPENAI_API_KEY=sk-...
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+
+  # Development mode with hot reload
+  obsidian-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./src:/app/src
+      - ./tests:/app/tests
+    environment:
+      - NODE_ENV=development
+      - LOG_LEVEL=debug
+    profiles:
+      - dev

@@ -1,0 +1,62 @@
+{
+  "name": "obsidian-decision-engine",
+  "version": "1.0.0",
+  "description": "B2B AI Financial Decision Engine - Enterprise-grade decision infrastructure for fintech applications",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint src --ext .ts",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "docs": "typedoc --out docs src"
+  },
+  "keywords": [
+    "fintech",
+    "financial-decisions",
+    "ai",
+    "b2b",
+    "api",
+    "affordability",
+    "debt-management",
+    "decision-engine"
+  ],
+  "author": "Obsidian Financial Technologies",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "fastify": "^4.26.0",
+    "@fastify/cors": "^9.0.1",
+    "@fastify/rate-limit": "^9.1.0",
+    "@fastify/helmet": "^11.1.1",
+    "@fastify/swagger": "^8.14.0",
+    "@fastify/swagger-ui": "^3.0.0",
+    "openai": "^4.28.0",
+    "zod": "^3.22.4",
+    "decimal.js": "^10.4.3",
+    "dayjs": "^1.11.10",
+    "pino": "^8.18.0",
+    "pino-pretty": "^10.3.1",
+    "dotenv": "^16.4.1",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.16",
+    "@types/uuid": "^9.0.8",
+    "typescript": "^5.3.3",
+    "tsx": "^4.7.0",
+    "vitest": "^1.2.2",
+    "@vitest/coverage-v8": "^1.2.2",
+    "eslint": "^8.56.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "typedoc": "^0.25.7"
+  }
+}
