@@ -1,3 +1,66 @@
+## 👤 My Contributions — Neel Gude
+
+This repository is a fork of the Obsidian AI project originally created by Ameya.  
+I’m adding this section to clearly highlight **my individual contributions** to the system’s architecture, decision engine, and AI integration.
+
+### 🚀 Key Technical Contributions
+
+- **Affordability / Decision Engine Architecture**  
+  Co-designed the affordability engine responsible for computing financial health metrics and evaluating purchase feasibility.  
+  Worked on:  
+  - DTI calculations  
+  - Savings-rate + emergency-fund metrics  
+  - Expense categorization logic  
+  - Purchase impact simulations  
+
+- **Core Affordability Calculator (`affordCalculator.ts`)**  
+  Contributed to the deterministic rule-based engine including:  
+  - Metric computation  
+  - Purchase impact modeling  
+  - Rule evaluation pipeline  
+  - Decision + recommendation output formats  
+
+- **Affordability Rules Framework**  
+  Helped structure the decision rules around:  
+  - Risk levels  
+  - Threshold checks  
+  - Recommendation generation (`getFailedRuleRecommendations`)  
+  - Auto-explanations for failed criteria  
+
+- **OpenAI Integration for AI Financial Assistant**  
+  Built the pipeline that combines Plaid financial data + deterministic rules + OpenAI reasoning to provide personalized financial insights and explanations.
+
+- **Financial Health Insights Module**  
+  Developed logic for computing:  
+  - Monthly cash flow  
+  - Recurring expense loads  
+  - Spending flags  
+  - “Months of safety” metric  
+  These power the user-facing AI guidance.
+
+- **System Design & Architecture**  
+  Contributed to system structure, including:  
+  - Decision engine flow  
+  - Data models (`UserFinancialProfile`, `DebtAccount`, etc.)  
+  - Output schema (`DecisionOutcome`, `ReasonCode`, `RiskLevel`)  
+  - Integration between rule engine + AI layer  
+
+- **Debugging & Rule Validation Tools**  
+  Wrote debugging utilities to:  
+  - Trace failed rules  
+  - Inspect money operations  
+  - Validate decision consistency  
+  - Catch edge cases in Plaid-sourced data  
+
+### Original Repository  
+This fork is based on the original Obsidian AI repo created and maintained by Ameya.  
+Link to original:(https://github.com/ameya1252/obsidian-decision-engine)
+
+---
+
+(Original README content from the project continues below.)
+
+
 # 🔮 Obsidian Decision Engine
 
 <div align="center">
